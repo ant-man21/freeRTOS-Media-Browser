@@ -31,9 +31,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>Src</name>
+			<name>app/Src</name>
 			<type>2</type>
 			<location>E:/Anthony/RTOS_media_browser/app/Src</location>
+		</link>
+		<link>
+			<name>platform/Src</name>
+			<type>2</type>
+			<location>E:/Anthony/RTOS_media_browser/platform/Src</location>
 		</link>
 	</linkedResources>
 </projectDescription>

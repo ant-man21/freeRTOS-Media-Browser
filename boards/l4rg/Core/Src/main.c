@@ -158,7 +158,7 @@ int main(void)
   MX_FATFS_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-
+  Platform_SPI_Init();
   /* USER CODE END 2 */
 
   /* Init scheduler */
