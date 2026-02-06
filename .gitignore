@@ -1,0 +1,43 @@
+# ===============================
+# STM32CubeIDE / Eclipse
+# ===============================
+.metadata/
+.settings/
+.project
+.cproject
+*.launch
+
+# ===============================
+# Build output
+# ===============================
+Debug/
+Release/
+build/
+Bin/
+*.elf
+*.map
+*.hex
+*.bin
+*.lst
+*.o
+*.d
+
+# ===============================
+# CubeMX generated backups
+# ===============================
+*.ioc.bak
+*.mxproject
+
+# ===============================
+# OS / editor junk
+# ===============================
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+
+# ===============================
+# VS Code (if ever used)
+# ===============================
+.vscode/
