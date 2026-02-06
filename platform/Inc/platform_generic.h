@@ -6,6 +6,9 @@
 typedef void* spi_handle_t;
 typedef void* mutex_handle_t;
 
+extern spi_handle_t spiHandle;
+extern mutex_handle_t spiMutex;
+
 void SPI_Transmit(spi_handle_t hspi, uint8_t *data, uint16_t size);
 void SPI_TransmitReceive(spi_handle_t hspi, uint8_t *tx, uint8_t *rx, uint16_t size);
 
@@ -19,3 +22,6 @@ void SD_Deselect(void);
 
 // board init
 void Platform_SPI_Init(void);
+
+// delay
+void Delay(uint32_t ms);

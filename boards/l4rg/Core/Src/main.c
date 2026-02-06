@@ -29,6 +29,7 @@
 #include "5x5_font.h"
 #include <string.h>
 #include "platform_generic.h"
+#include "sdcard_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -42,8 +43,6 @@
 #define INFO_AREA_Y 30
 #define MAX_LINE_CHARS 38  // max characters per line
 #define MAX_TEXT_LENGTH 512
-#define MAX_FILE_NUMBER 32
-#define SHARED_BUFFER_SIZE 512
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -508,129 +507,17 @@ void DisplayTaskEntry(void *argument)
 void SDCardTaskEntry(void *argument)
 {
   /* USER CODE BEGIN SDCardTaskEntry */
-  FATFS FatFs;
-  FIL File;
-  FRESULT fres;
-  UINT bytesRead;
-  DSTATUS stat;
-  DIR dir;
-  FILINFO fno;
-  static uint8_t fileIndex = 0;
-  static char fileList[MAX_FILE_NUMBER][50];  // Store up to MAX_FILE_NUMBER filenames (47.3 format)
-  static uint8_t fileCount = 0;
+    // Initialize SD card and mount filesystem
+    SDCard_Init();
 
-  osDelay(500);
+    // Scan directory for files
+    if(SDCard_ScanDirectory("/sappy_notes") == 0) {
+        // No files found - halt
+        while(1) osDelay(1000);
+    }
 
-  printf("SD Card Test Starting...\r\n");
-
-  // Check disk status before mount
-  stat = disk_initialize(0);
-  printf("disk_initialize returned: %d (0=OK, 1=NOINIT, 2=NOTRDY, 4=PROTECT)\r\n", stat);
-
-  if(stat != 0) {
-      printf("Disk initialization failed!\r\n");
-      while(1) { osDelay(1000); }
-  }
-
-  // Mount the SD card
-  fres = f_mount(&FatFs, "", 1);
-  if(fres != FR_OK) {
-      printf("f_mount error: %d\r\n", fres);
-      while(1) { osDelay(1000); }
-  }
-  printf("SD Card mounted successfully!\r\n");
-
-  // Scan directory and build file list
-  fres = f_opendir(&dir, "/sappy_notes");
-  if(fres == FR_OK) {
-      while(1) {
-          fres = f_readdir(&dir, &fno);
-          if(fres != FR_OK || fno.fname[0] == 0) break;  // Break on error or end
-
-          // Skip directories and hidden files
-          if(!(fno.fattrib & AM_DIR) && fno.fname[0] != '.') {
-              if(fileCount < MAX_FILE_NUMBER) {
-            	  sprintf(fileList[fileCount], "/sappy_notes/%s", fno.fname);
-                  printf("Found file: %s\r\n", fileList[fileCount]);
-                  fileCount++;
-              }
-          }
-      }
-      f_closedir(&dir);
-      printf("Total files found: %d\r\n", fileCount);
-  } else {
-      printf("f_opendir error: %d\r\n", fres);
-      while(1) { osDelay(1000); }
-  }
-
-  if(fileCount == 0) {
-      printf("No files found on SD card!\r\n");
-      while(1) { osDelay(1000); }
-  }
-
-  /* Infinite loop */
-  for(;;)
-  {
-      // ========== CHECK BUTTON FLAGS ==========
-      if(cycle_next_flag) {
-          cycle_next_flag = 0;  // Clear flag
-          fileIndex = (fileIndex + 1) % fileCount;  // Cycle forward
-          printf("\n>>> NEXT: Cycling to file %d/%d <<<\r\n", fileIndex + 1, fileCount);
-          read_file_flag = 1;
-      }
-
-      if(cycle_prev_flag) {
-          cycle_prev_flag = 0;  // Clear flag
-          // Cycle backward (wrap around)
-          fileIndex = (fileIndex == 0) ? (fileCount - 1) : (fileIndex - 1);
-          printf("\n>>> PREV: Cycling to file %d/%d <<<\r\n", fileIndex + 1, fileCount);
-          read_file_flag = 1;
-      }
-      if(read_file_flag) {
-          read_file_flag = 0;  // Clear flag immediately
-          printf(">>> About to read file <<<\r\n");  // DEBUG
-		  // ========== OPEN AND READ CURRENT FILE ==========
-		  printf("\r\n--- Reading file %d/%d: %s ---\r\n",
-				 fileIndex + 1, fileCount, fileList[fileIndex]);
-
-		  fres = f_open(&File, fileList[fileIndex], FA_READ);
-		  if(fres != FR_OK) {
-			  printf("f_open error: %d\r\n", fres);
-              osMutexAcquire(fileMutexHandle, osWaitForever);
-              snprintf(shared_file_buffer, SHARED_BUFFER_SIZE,
-                       "Error: Could not open file\n%s", fileList[fileIndex]);
-              file_content_updated = 1;
-              osMutexRelease(fileMutexHandle);
-		  } else {
-			  // Read the file
-			  osMutexAcquire(fileMutexHandle, osWaitForever);
-			  fres = f_read(&File, shared_file_buffer, SHARED_BUFFER_SIZE - 1, &bytesRead);
-			  if(fres == FR_OK) {
-				  shared_file_buffer[bytesRead] = '\0';  // Null-terminate
-				  printf("File contents (%u bytes): %s\r\n", bytesRead, shared_file_buffer);
-				  file_content_updated = 1;
-			  } else {
-				  printf("f_read error: %d\r\n", fres);
-				  file_content_updated = 1;
-			  }
-
-			  // Close the file
-			  osMutexRelease(fileMutexHandle);
-			  f_close(&File);
-		  }
-      }
-      osDelay(100);
-
-      // ========== AUTO-PLAY (OPTIONAL) ==========
-      // Comment out these lines if you only want button control
-//      if(autoPlay) {
-//          osDelay(5000);  // Wait 5 seconds
-//          fileIndex = (fileIndex + 1) % fileCount;  // Auto-cycle
-//          printf("\n>>> AUTO: Moving to next file <<<\r\n");
-//      } else {
-//          osDelay(100);  // Short delay for responsive button checking
-//      }
-  }
+    // Enter main task loop
+    SDCardTaskLoop();
   /* USER CODE END SDCardTaskEntry */
 }
 

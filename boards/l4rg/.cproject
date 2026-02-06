@@ -99,7 +99,7 @@
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="FATFS"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
-						<entry excluding="esp32_spi.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="platform/Src"/>
+						<entry excluding="esp32_generic.c|esp32_spi.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="platform/Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="task/Src"/>
 					</sourceEntries>
 				</configuration>

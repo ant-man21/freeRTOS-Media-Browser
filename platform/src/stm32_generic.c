@@ -49,3 +49,7 @@ void SD_Deselect(void) {
     HAL_GPIO_WritePin(SD_CS_GPIO_Port, SD_CS_Pin, GPIO_PIN_SET);
     HAL_Delay(1);
 }
+
+void Delay(uint32_t ms) {
+    osDelay(ms);  // Change this line when porting
+}

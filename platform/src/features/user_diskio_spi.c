@@ -1,9 +1,6 @@
 #include "user_diskio_spi.h"
 #include "platform_generic.h"
 
-extern spi_handle_t spiHandle;
-extern mutex_handle_t spiMutex;
-
 // SD card responses
 #define SD_RESPONSE_NO_ERROR      0x00
 #define SD_IN_IDLE_STATE          0x01
@@ -74,7 +71,7 @@ DSTATUS USER_SPI_initialize(BYTE pdrv)
         Mutex_Unlock(spiMutex);
         SD_Deselect();
 
-        HAL_Delay(1);
+        Delay(1);
         SD_Select();
 
         uint8_t cmdPacket41[6] = {0x40 | 41, 0x40, 0x00, 0x00, 0x00, 0xFF};
@@ -97,7 +94,7 @@ DSTATUS USER_SPI_initialize(BYTE pdrv)
             break;
         }
 
-        HAL_Delay(10);
+        Delay(10);
     } while(response != 0x00);
 
     if(retry >= 400) {
