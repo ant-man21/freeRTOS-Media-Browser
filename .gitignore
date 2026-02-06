@@ -3,8 +3,8 @@
 # ===============================
 .metadata/
 .settings/
-.project
-.cproject
+# .project
+# .cproject
 *.launch
 
 # ===============================
