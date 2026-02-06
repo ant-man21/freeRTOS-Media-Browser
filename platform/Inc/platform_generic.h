@@ -12,3 +12,10 @@ void SPI_TransmitReceive(spi_handle_t hspi, uint8_t *tx, uint8_t *rx, uint16_t s
 mutex_handle_t Mutex_Create(void);
 void Mutex_Lock(mutex_handle_t mutex);
 void Mutex_Unlock(mutex_handle_t mutex);
+
+// Board-level CS (chip select) control for SD card
+void SD_Select(void);
+void SD_Deselect(void);
+
+// board init
+void Platform_SPI_Init(void);

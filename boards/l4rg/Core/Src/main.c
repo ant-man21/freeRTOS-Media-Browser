@@ -28,6 +28,7 @@
 #include "ILI9341_GFX.h"
 #include "5x5_font.h"
 #include <string.h>
+#include "platform_generic.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

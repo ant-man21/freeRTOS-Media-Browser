@@ -1,5 +1,5 @@
 #include "user_diskio_spi.h"
-#include "platform_spi.h"
+#include "platform_generic.h"
 
 extern spi_handle_t spiHandle;
 extern mutex_handle_t spiMutex;
@@ -10,8 +10,6 @@ extern mutex_handle_t spiMutex;
 #define SD_START_TOKEN            0xFE
 
 static uint8_t SD_SendCmd(uint8_t cmd, uint32_t arg, uint8_t crc);
-static void SD_Select(void);
-static void SD_Deselect(void);
 static uint8_t SD_WaitReady(void);
 static uint8_t SD_ReadSingleBlock(uint32_t sector, uint8_t *buffer);
 
@@ -152,10 +150,6 @@ DRESULT USER_SPI_ioctl(BYTE pdrv, BYTE cmd, void *buff)
 
     return res;
 }
-
-// --- Helper functions ---
-static void SD_Select(void) { HAL_GPIO_WritePin(SD_CS_GPIO_Port, SD_CS_Pin, GPIO_PIN_RESET); HAL_Delay(1); }
-static void SD_Deselect(void) { HAL_GPIO_WritePin(SD_CS_GPIO_Port, SD_CS_Pin, GPIO_PIN_SET); HAL_Delay(1); }
 
 static uint8_t SD_WaitReady(void)
 {

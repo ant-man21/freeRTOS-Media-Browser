@@ -1,7 +1,8 @@
 // platform/Src/stm32_spi.c
-#include "platform_spi.h"
+#include "platform_generic.h"
 #include "stm32l4xx_hal.h"
 #include "cmsis_os.h"
+#include "main.h" //maybe not ideal for portability
 
 // STM32 HAL handles (CubeMX generated)
 extern SPI_HandleTypeDef hspi1;
@@ -36,4 +37,15 @@ void Mutex_Lock(mutex_handle_t mutex) {
 
 void Mutex_Unlock(mutex_handle_t mutex) {
     osMutexRelease((osMutexId_t)mutex);
+}
+
+// Board-level CS abstraction
+void SD_Select(void) {
+    HAL_GPIO_WritePin(SD_CS_GPIO_Port, SD_CS_Pin, GPIO_PIN_RESET);
+    HAL_Delay(1);
+}
+
+void SD_Deselect(void) {
+    HAL_GPIO_WritePin(SD_CS_GPIO_Port, SD_CS_Pin, GPIO_PIN_SET);
+    HAL_Delay(1);
 }

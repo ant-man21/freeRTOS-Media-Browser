@@ -67,8 +67,8 @@
 									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/FatFs/src"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32L4xx/Include"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="E:/Anthony/RTOS_media_browser/app/Inc"/>
 									<listOptionValue builtIn="false" value="&quot;E:\Anthony\RTOS_media_browser\platform\Inc&quot;"/>
+									<listOptionValue builtIn="false" value="E:/Anthony/RTOS_media_browser/task/Inc"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1611309461" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -99,8 +99,8 @@
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="FATFS"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="app/Src"/>
 						<entry excluding="esp32_spi.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="platform/Src"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="task/Src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
