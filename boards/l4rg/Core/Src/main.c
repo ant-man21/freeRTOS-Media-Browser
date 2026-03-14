@@ -448,7 +448,11 @@ void DisplayTaskEntry(void *argument)
           // Clear display area
           ILI9341_Fill_Screen(bg_color);
 		  // Draw header
-		  ILI9341_Draw_Text("STM32 Display Test", 10, 10, YELLOW, 2, bg_color);
+#if defined(STM32L476xx)
+		  ILI9341_Draw_Text("L4RG Display Test", 10, 10, YELLOW, 2, bg_color);
+#elif defined(STM32F411xE)
+		  ILI9341_Draw_Text("F411 Display Test", 10, 10, YELLOW, 2, bg_color);
+#endif
 		  const char *p = local_buffer;   // start of string
 		  uint8_t cursor_x = INFO_AREA_X;
 		  uint8_t cursor_y = INFO_AREA_Y;
