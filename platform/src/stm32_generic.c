@@ -1,6 +1,10 @@
 // platform/Src/stm32_spi.c
 #include "platform_generic.h"
-#include "stm32l4xx_hal.h"
+#if defined(STM32L476xx)
+  #include "stm32l4xx_hal.h"
+#elif defined(STM32F411xE)
+  #include "stm32f4xx_hal.h"
+#endif
 #include "cmsis_os.h"
 #include "main.h" //maybe not ideal for portability
 
