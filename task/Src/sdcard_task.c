@@ -24,7 +24,7 @@ void SDCard_Init(void)
     // Check disk status before mount
     stat = disk_initialize(0);
     printf("disk_initialize returned: %d (0=OK, 1=NOINIT, 2=NOTRDY, 4=PROTECT)\r\n", stat);
-    
+
     if(stat != 0) {
         printf("Disk initialization failed!\r\n");
         while(1) { Delay(1000); }
