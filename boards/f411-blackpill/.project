@@ -33,12 +33,12 @@
 		<link>
 			<name>platform/Src</name>
 			<type>2</type>
-			<location>E:/Anthony/RTOS_media_browser/platform/Src</location>
+			<location>C:/bea/freeRTOS-Media-Browser/platform/src</location>
 		</link>
 		<link>
 			<name>task/Src</name>
 			<type>2</type>
-			<location>E:/Anthony/RTOS_media_browser/task/Src</location>
+			<location>C:/bea/freeRTOS-Media-Browser/task/Src</location>
 		</link>
 	</linkedResources>
 </projectDescription>

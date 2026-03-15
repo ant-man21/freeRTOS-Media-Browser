@@ -67,8 +67,8 @@
 									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/FatFs/src"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32L4xx/Include"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="&quot;E:\Anthony\RTOS_media_browser\platform\Inc&quot;"/>
-									<listOptionValue builtIn="false" value="E:/Anthony/RTOS_media_browser/task/Inc"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bea\freeRTOS-Media-Browser\task\Inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bea\freeRTOS-Media-Browser\platform\Inc&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1611309461" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
