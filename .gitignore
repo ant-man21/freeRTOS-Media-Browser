@@ -21,6 +21,10 @@ Bin/
 *.lst
 *.o
 *.d
+*.su
+*.cyclo
+*.list
+EWARM/
 
 # ===============================
 # CubeMX generated backups
