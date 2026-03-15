@@ -10,21 +10,7 @@
 # ===============================
 # Build output
 # ===============================
-# Ignore build artifacts but keep makefiles
-Debug/*.elf
-Debug/*.map
-Debug/*.list
-Debug/*.o
-Debug/*.d
-Debug/*.su
-Debug/*.cyclo
-Debug/objects.list
-Debug/**/*.o
-Debug/**/*.d
-Debug/**/*.su
-Debug/**/*.cyclo
-Debug/**/*.list
-
+Debug/
 Release/
 build/
 Bin/
