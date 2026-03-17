@@ -1,4 +1,7 @@
-#include<display_task.h>
+#include <display_task.h>
+
+static char local_buffer[SHARED_BUFFER_SIZE];
+
 void Display_Init(uint16_t bg_color) {
   printf("Display: Init starting\r\n");
   ILI9341_Init();
@@ -6,9 +9,9 @@ void Display_Init(uint16_t bg_color) {
   ILI9341_Fill_Screen(bg_color);
   return;
 }
+
 void DisplayTaskLoop(uint16_t bg_color,
-		             uint16_t text_color,
-		             char* local_buffer)
+		             uint16_t text_color)
 {
 	  printf(">>> Display: Flag detected! <<<\r\n");  // DEBUG
 	  // Copy shared buffer to local buffer (thread-safe)
@@ -56,15 +59,9 @@ void DisplayTaskLoop(uint16_t bg_color,
 		  ILI9341_Draw_Text(line_buf, cursor_x, cursor_y, text_color, 1, bg_color);
 	  }
 
-	  // draw any remaining characters
-	  if(line_idx > 0)
-	  {
-		  line_buf[line_idx] = '\0';
-		  ILI9341_Draw_Text(line_buf, cursor_x, cursor_y, text_color, 1, bg_color);
-	  }
 	  printf("Display Updated\r\n");
 	//      UBaseType_t highWaterMark = uxTaskGetStackHighWaterMark(NULL); // NULL = current task
 	//      printf("Free stack words left: %lu\n", highWaterMark);
-	osDelay(100); // wait before refreshing
+
 	return;
 }

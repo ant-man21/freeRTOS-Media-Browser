@@ -421,16 +421,14 @@ void StartDefaultTask(void *argument)
 void DisplayTaskEntry(void *argument)
 {
   /* USER CODE BEGIN DisplayTaskEntry */
-  uint16_t bg_color = BLACK;
-  uint16_t text_color = CYAN;
-  char local_buffer[SHARED_BUFFER_SIZE];
-  Display_Init(bg_color);
+  Display_Init(BLACK);
 
   /* Infinite loop */
   for(;;) {
 	  if(file_content_updated) {
-		  DisplayTaskLoop(bg_color, text_color, local_buffer);
+		  DisplayTaskLoop(BLACK, CYAN);
 	  }
+      osDelay(100); // wait before refreshing
   }
   /* USER CODE END DisplayTaskEntry */
 }

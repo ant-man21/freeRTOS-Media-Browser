@@ -21,4 +21,4 @@ extern osMutexId_t fileMutexHandle;
 
 // Function declarations
 void Display_Init(uint16_t bg_color);
-void DisplayTaskLoop(uint16_t bg_color, uint16_t text_color, char* local_buffer);
+void DisplayTaskLoop(uint16_t bg_color, uint16_t text_color);
