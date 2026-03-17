@@ -1,7 +1,8 @@
 #pragma once
 
-#include "ff.h"
 #include <stdint.h>
+#include "ff.h"
+#include "fatfs.h"
 #include "platform_generic.h"
 
 // Configuration
