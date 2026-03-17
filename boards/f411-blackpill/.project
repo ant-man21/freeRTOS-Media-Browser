@@ -33,12 +33,12 @@
 		<link>
 			<name>platform/Src</name>
 			<type>2</type>
-			<location>E:/Anthony/RTOS_media_browser/platform/Src</location>
+			<locationURI>PARENT-2-PROJECT_LOC/platform/Src</locationURI>
 		</link>
 		<link>
 			<name>task/Src</name>
 			<type>2</type>
-			<location>E:/Anthony/RTOS_media_browser/task/Src</location>
+			<locationURI>PARENT-2-PROJECT_LOC/task/Src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
