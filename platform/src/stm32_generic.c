@@ -17,8 +17,8 @@ spi_handle_t spiHandle;
 mutex_handle_t spiMutex;
 
 void Platform_SPI_Init(void) {
-    spiHandle = (spi_handle_t)&hspi1;       // point platform handle to STM32 HAL handle
-    spiMutex = (mutex_handle_t)spiMutexHandle; // point platform mutex to FreeRTOS mutex
+    spiHandle = (spi_handle_t)&hspi1;
+    spiMutex  = (mutex_handle_t)&spiMutexHandle; // store ADDRESS of handle
 }
 
 // SPI API (platform-agnostic)
@@ -36,11 +36,11 @@ mutex_handle_t Mutex_Create(void) {
 }
 
 void Mutex_Lock(mutex_handle_t mutex) {
-    osMutexAcquire((osMutexId_t)mutex, osWaitForever);
+    osMutexAcquire(*(osMutexId_t*)mutex, osWaitForever);
 }
 
 void Mutex_Unlock(mutex_handle_t mutex) {
-    osMutexRelease((osMutexId_t)mutex);
+    osMutexRelease(*(osMutexId_t*)mutex);
 }
 
 // Board-level CS abstraction

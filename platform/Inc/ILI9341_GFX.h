@@ -48,7 +48,13 @@
 #define ILI9341_GFX_H
 
 //#include "stm32f7xx_hal.h" //ANT_DELETE
-#include "stm32l4xx_hal.h" //ANT_ADD
+//ANT_ADD start
+#if defined(STM32L476xx)
+  #include "stm32l4xx_hal.h"
+#elif defined(STM32F411xE)
+  #include "stm32f4xx_hal.h"
+#endif
+//ANT_ADD end
 
 #define HORIZONTAL_IMAGE	0
 #define VERTICAL_IMAGE		1
