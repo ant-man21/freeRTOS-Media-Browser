@@ -2,6 +2,11 @@
 #pragma once
 #include <stdio.h>
 #include <stdint.h>
+#if defined(STM32L476xx)
+  #include "stm32l4xx_hal.h"
+#elif defined(STM32F411xE)
+  #include "stm32f4xx_hal.h"
+#endif
 
 typedef void* spi_handle_t;
 typedef void* mutex_handle_t;

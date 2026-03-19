@@ -57,6 +57,18 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define FILE_FORWARD_Pin GPIO_PIN_0
+#define FILE_FORWARD_GPIO_Port GPIOA
+#define FILE_BACK_Pin GPIO_PIN_1
+#define FILE_BACK_GPIO_Port GPIOA
+#define TFT_CS_Pin GPIO_PIN_6
+#define TFT_CS_GPIO_Port GPIOB
+#define TFT_DC_Pin GPIO_PIN_7
+#define TFT_DC_GPIO_Port GPIOB
+#define TFT_RESET_Pin GPIO_PIN_8
+#define TFT_RESET_GPIO_Port GPIOB
+#define SD_CS_Pin GPIO_PIN_9
+#define SD_CS_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

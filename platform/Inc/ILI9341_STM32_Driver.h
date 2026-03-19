@@ -85,7 +85,13 @@
 #define ILI9341_STM32_DRIVER_H
 
 //#include "stm32f7xx_hal.h" //ANT_DELETE
-#include "stm32l4xx_hal.h" //ANT_ADD
+//ANT_ADD start
+#if defined(STM32L476xx)
+  #include "stm32l4xx_hal.h"
+#elif defined(STM32F411xE)
+  #include "stm32f4xx_hal.h"
+#endif
+//ANT_ADD end
 #include "main.h" //ANT_ADD
 #include "cmsis_os.h"
 
